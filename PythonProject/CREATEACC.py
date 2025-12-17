@@ -1,0 +1,131 @@
+import tkinter as tk
+from tkinter import ttk
+import streamlit as st
+from PIL import Image, ImageTk
+import subprocess
+
+root = tk.Tk()
+root.attributes('-fullscreen', True)
+
+style = ttk.Style()
+style.theme_use("clam")
+
+
+def exit_fullscreen(event=None):
+    root.attributes('-fullscreen', False)
+
+
+root.bind('<Escape>', exit_fullscreen)
+
+root.title("Account")
+
+bg_color = "#111827"
+fg_color = "#FFFFFF"
+accent_color = "#3B82F6"
+
+root.configure(bg=bg_color)
+
+style.configure(
+    "Main.TFrame",
+    background=bg_color, )
+style.configure(
+    "Title.TLabel",
+    background=bg_color,
+    foreground=fg_color,
+    font=("Calibri", 20, "bold"))
+
+style.configure(
+    "TButton",
+    font=("Calibri", 12),
+    foreground=fg_color,
+    background=accent_color,
+    padding=6, )
+
+style.configure(
+    "TCombobox",
+    fieldbackground="#1F2933",
+    background="#1F2933",
+    foreground=fg_color, )
+
+
+def show_account_screen(loginpage):
+    button2 = ttk.Button(root, text="Back", width=5, command=lambda: (exit_button_click(root)))
+    button2.place(x=1060, y=5)
+
+
+def exit_button_click(window):
+    window.destroy()
+
+
+def open_PROJECT():
+    subprocess.Popen(["python", "PROJECT.py"])
+
+
+def open_ACCOUNT():
+    subprocess.Popen(["python", "ACCOUNT.py"])
+
+
+BORDER_WIDTH = 7
+border = ttk.Frame(root, style="Main.TFrame", padding=20, borderwidth=BORDER_WIDTH, relief="ridge")
+border.place(relx=0.5, rely=0.5, anchor="center", width=1530, height=862)
+
+BORDER_WIDTH = 7
+border = ttk.Frame(root, style="Main.TFrame", padding=10, borderwidth=BORDER_WIDTH, )
+border.place(relx=0.5, rely=0.5, anchor="center", width=1530, height=962)
+style.configure("Items.TFrame", background="#1F2933")
+items_rec = tk.Frame(border, bg="#1F2933", padx=10, pady=10, highlightbackground="white", highlightthickness=2)
+items_rec.place(relx=0.5, rely=0.5, anchor="center", relwidth=1, relheight=0.8)
+items_rec.configure(background="#1F2933")
+
+label = ttk.Label(root, text="Account", font=("Arial", 20))
+label.place(x=20, y=9)
+
+button = ttk.Button(root, text="Main Page", command=open_PROJECT)
+button.place(x=950, y=5)
+
+img = Image.open("logopic.jpg")
+img = img.resize((220, 220))
+img_tk = ImageTk.PhotoImage(img)
+logo_pic = ttk.Label(root, image=img_tk)
+logo_pic.image = img_tk
+logo_pic.place(x=1270, y=80)
+
+slogan = ttk.Label(root, text="Your Center For", font=("ROG Fonts", 13))
+slogan.place(x=1275, y=350)
+slogan2 = ttk.Label(root, text="All Things Gaming", font=("ROG Fonts", 13))
+slogan2.place(x=1270, y=380)
+
+style = ttk.Style(root)
+style.configure('TButton', font=('Arial', 12), foreground='blue')
+
+combo = ttk.Combobox(root, values=["Option 1", "Option 2", "Option 3"])
+combo.pack(pady=4000)
+
+exit_button = ttk.Button(root, text="Back", width=5, command=lambda: exit_button_click(root))
+exit_button.place(x=1450, y=5)
+
+login = ttk.Label(root, text="Create Account", font=("Arial", 15))
+login.place(x=720, y=170)
+name = ttk.Label(root, text="Username", font=("Arial", 9))
+name.place(x=719, y=220)
+name_Box = tk.Text(width=25, height=1)
+name_Box.place(x=650, y=240)
+
+password = ttk.Label(root, text="Password", font=("Arial", 9))
+password.place(x=719, y=320)
+pw_Box = tk.Text(width=25, height=1)
+pw_Box.place(x=650, y=340)
+
+newbutton = ttk.Button(root, text="Log In", command=open_ACCOUNT)
+newbutton.place(x=690, y=420)
+
+combo.set("Select an option")
+
+
+def on_combobox_selected(event):
+    selected_value = combo.get()
+    print(f"Selected: {selected_value}")
+
+
+combo.bind("<<ComboboxSelected>>", on_combobox_selected)
+root.mainloop()
