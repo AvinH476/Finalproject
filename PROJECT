@@ -1,0 +1,256 @@
+import tkinter as tk
+from tkinter import ttk
+import streamlit as st
+from PIL import Image, ImageTk
+import subprocess
+
+
+root = tk.Tk()
+root.attributes('-fullscreen', True)
+
+style = ttk.Style()
+style.theme_use("clam")
+
+
+def exit_fullscreen(event=None):
+    root.attributes('-fullscreen', False)
+
+
+root.bind('<Escape>', exit_fullscreen)
+
+root.title("Main Page")
+
+bg_color = "#111827"
+fg_color = "#FFFFFF"
+accent_color = "#3B82F6"
+
+root.configure(bg=bg_color)
+
+style.configure(
+    "Main.TFrame",
+    background=bg_color,)
+
+style.configure(
+    "Title.TLabel",
+    background=bg_color,
+    foreground=fg_color,
+    font=("Calibri", 20, "bold"))
+
+style.configure(
+    "TButton",
+    font=("Calibri", 12),
+    foreground=fg_color,
+    background=accent_color,
+    padding=6,)
+
+style.configure(
+    "TCombobox",
+    fieldbackground="#1F2933",
+    background="#1F2933",
+    foreground=fg_color,)
+
+
+def show_account_screen(loginpage):
+    button2 = ttk.Button(root, text="Exit", width=5, command=lambda: (exit_button_click(root)))
+    button2.place(x=1060, y=5)
+
+
+def exit_button_click(window):
+    window.destroy()
+
+def open_ACCOUNT():
+    subprocess.Popen(["python", "ACCOUNT.py"])
+
+def open_XBOX():
+    subprocess.Popen(["python", "XBOX.py"])
+
+def open_WII():
+    subprocess.Popen(["python", "WII.py"])
+
+def open_PS5():
+    subprocess.Popen(["python", "PS5.py"])
+
+def open_SWITCH():
+    subprocess.Popen(["python", "SWITCH.py"])
+
+def open_MINECRAFT():
+    subprocess.Popen(["python", "MINECRAFT.py"])
+
+def open_MARIO():
+    subprocess.Popen(["python", "MARIO.py"])
+
+def open_PLANET():
+    subprocess.Popen(["python", "PLANET.py"])
+
+def open_ZELDA():
+    subprocess.Popen(["python", "ZELDA.py"])
+
+
+BORDER_WIDTH = 7
+border = ttk.Frame(root, style="Main.TFrame", padding=10, borderwidth=BORDER_WIDTH,)
+border.place(relx=0.5, rely=0.5, anchor="center", width=1530, height=962)
+style.configure("Items.TFrame", background="#1F2933")
+items_rec = tk.Frame(border, bg="#1F2933", padx=10, pady=10, highlightbackground="white", highlightthickness=2)
+items_rec.place(relx=0.5, rely=0.5, anchor="center", relwidth=1, relheight=0.8)
+items_rec.configure(background="#1F2933")
+
+
+
+label = ttk.Label(root, text="Home", font=("Arial", 25))
+label.place(x=20, y=9)
+
+button = ttk.Button(root, text="Account", command=open_ACCOUNT)
+button.place(x=950, y=5)
+
+style = ttk.Style(root)
+style.configure('TButton', font=('Arial', 12), foreground='blue')
+
+combo = ttk.Combobox(root, values=["Option 1", "Option 2", "Option 3"])
+combo.pack(pady=4000)
+
+exit_button = ttk.Button(root, text="Exit", width=5, command=lambda: exit_button_click(root))
+exit_button.place(x=1450, y=5)
+
+img = Image.open("logopic.jpg")
+img = img.resize((220, 220))
+img_tk = ImageTk.PhotoImage(img)
+logo_pic = ttk.Label(root, image=img_tk)
+logo_pic.image = img_tk
+logo_pic.place(x=1270, y=80)
+
+slogan = ttk.Label(root, text="Your Center For", font=("ROG Fonts", 13))
+slogan.place(x=1275, y=350)
+slogan2 = ttk.Label(root, text="All Things Gaming", font=("ROG Fonts", 13))
+slogan2.place(x=1270, y=380)
+
+item1 = ttk.Label(root, text="Xbox One X 1 TB Console", font=("Arial", 12))
+item1.place(x=200, y=95)
+item1price = ttk.Label(root, text="$299.99    NEW IN STORES", font=("Arial", 12))
+item1price.place(x=200, y=135)
+
+item1button = ttk.Button(root, text="Details", command=open_XBOX)
+item1button.place(x=500, y=90)
+
+img = Image.open("xbox pic.jpg")
+img = img.resize((100, 100))
+img_tk = ImageTk.PhotoImage(img)
+item1_pic = ttk.Label(root, image=img_tk)
+item1_pic.image = img_tk
+item1_pic.place(x=50, y=80)
+
+item2 = ttk.Label(root, text="Nintendo Wii Console (Black Edition)", font=("Arial", 12))
+item2.place(x=200, y=240)
+item2price = ttk.Label(root, text="$119.99    NEW", font=("Arial", 12))
+item2price.place(x=200, y=290)
+
+item2button = ttk.Button(root, text="Details", command=open_WII)
+item2button.place(x=500, y=240)
+
+img = Image.open("wii pic2.jpg")
+img = img.resize((100, 100))
+img_tk = ImageTk.PhotoImage(img)
+item2_pic = ttk.Label(root, image=img_tk)
+item2_pic.image = img_tk
+item2_pic.place(x=50, y=220)
+
+
+item3 = ttk.Label(root, text="Sony Playstation 5", font=("Arial", 12))
+item3.place(x=200, y=375)
+item3price = ttk.Label(root, text="$599.99    NEW AT GAMESTOP", font=("Arial", 12))
+item3price.place(x=200, y=415)
+
+item3button = ttk.Button(root, text="Details", command=open_PS5)
+item3button.place(x=500, y=390)
+
+img = Image.open("ps5 pic.jpg")
+img = img.resize((100, 100))
+img_tk = ImageTk.PhotoImage(img)
+item3_pic = ttk.Label(root, image=img_tk)
+item3_pic.image = img_tk
+item3_pic.place(x=50, y=355)
+
+item4 = ttk.Label(root, text="Nintendo Switch Multiple Colors", font=("Arial", 12))
+item4.place(x=200, y=510)
+item4price = ttk.Label(root, text="$299.99    NEW IN STORES", font=("Arial", 12))
+item4price.place(x=200, y=540)
+
+item4button = ttk.Button(root, text="Details", command=open_SWITCH)
+item4button.place(x=500, y=520)
+
+img = Image.open("switch pic1.jpg")
+img = img.resize((100, 100))
+img_tk = ImageTk.PhotoImage(img)
+item4_pic = ttk.Label(root, image=img_tk)
+item4_pic.image = img_tk
+item4_pic.place(x=50, y=490)
+
+item5 = ttk.Label(root, text="Minecraft Xbox One Edition", font=("Arial", 12))
+item5.place(x=880, y=95)
+item5price = ttk.Label(root, text="$29.99    NEW IN STORES", font=("Arial", 12))
+item5price.place(x=880, y=125)
+
+item5button = ttk.Button(root, text="Details", command=open_MINECRAFT)
+item5button.place(x=1100, y=90)
+
+img = Image.open("minecraft pic.jpg")
+img = img.resize((100, 100))
+img_tk = ImageTk.PhotoImage(img)
+item5_pic = ttk.Label(root, image=img_tk)
+item5_pic.image = img_tk
+item5_pic.place(x=730, y=80)
+
+item6 = ttk.Label(root, text="Mario Party 8 Wii", font=("Arial", 12))
+item6.place(x=880, y=240)
+item6price = ttk.Label(root, text="$47.99    USED GREAT CONDITION", font=("Arial", 12))
+item6price.place(x=880, y=290)
+
+item6button = ttk.Button(root, text="Details", command=open_MARIO)
+item6button.place(x=1100, y=240)
+
+img = Image.open("marioparty pic.jpg")
+img = img.resize((100, 100))
+img_tk = ImageTk.PhotoImage(img)
+item6_pic = ttk.Label(root, image=img_tk)
+item6_pic.image = img_tk
+item6_pic.place(x=730, y=220)
+
+item7 = ttk.Label(root, text="Little Big Planet 3 - PS4", font=("Arial", 12))
+item7.place(x=880, y=375)
+item7price = ttk.Label(root, text="$26.99    NEW", font=("Arial", 12))
+item7price.place(x=880, y=415)
+
+item7button = ttk.Button(root, text="Details", command=open_PLANET)
+item7button.place(x=1100, y=390)
+
+img = Image.open("planet pic.jpg")
+img = img.resize((100, 100))
+img_tk = ImageTk.PhotoImage(img)
+item7_pic = ttk.Label(root, image=img_tk)
+item7_pic.image = img_tk
+item7_pic.place(x=730, y=355)
+
+item8 = ttk.Label(root, text="The Legend of Zelda: Breath of the Wild", font=("Arial", 12))
+item8.place(x=880, y=510)
+item8price = ttk.Label(root, text="$49.99    NEW", font=("Arial", 12))
+item8price.place(x=880, y=540)
+
+item8button = ttk.Button(root, text="Details", command=open_ZELDA)
+item8button.place(x=1100, y=535)
+
+img = Image.open("zelda pic.jpg")
+img = img.resize((100, 100))
+img_tk = ImageTk.PhotoImage(img)
+item8_pic = ttk.Label(root, image=img_tk)
+item8_pic.image = img_tk
+item8_pic.place(x=730, y=490)
+
+combo.set("Select an option")
+
+
+def on_combobox_selected(event):
+    selected_value = combo.get()
+    print(f"Selected: {selected_value}")
+
+
+combo.bind("<<ComboboxSelected>>", on_combobox_selected)
+root.mainloop()
